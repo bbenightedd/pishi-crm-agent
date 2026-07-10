@@ -101,26 +101,26 @@ def analyze_lead(lead_text, retry_note=None):
 
 
 def extract_json_from_response(response_text):
-cleaned = strip_code_fences(response_text)
+    cleaned = strip_code_fences(response_text)
 
-start_index = cleaned.find("{")
-if start_index == -1:
-raise ValueError("No JSON object found in response.")
+    start_index = cleaned.find("{")
+    if start_index == -1:
+        raise ValueError("No JSON object found in response.")
 
-decoder = json.JSONDecoder()
-parsed, _ = decoder.raw_decode(cleaned[start_index:])
-return parsed
+    decoder = json.JSONDecoder()
+    parsed, _ = decoder.raw_decode(cleaned[start_index:])
+    return parsed
 
 def strip_code_fences(text):
-cleaned = text.strip()
+    cleaned = text.strip()
 
-if cleaned.startswith("```"):
+    if cleaned.startswith("```"):
         lines = cleaned.splitlines()
 
         if lines and lines[0].startswith("```"):
-lines = lines[1:]
+    lines = lines[1:]
 
-if lines and lines[-1].strip() == "```":
+    if lines and lines[-1].strip() == "```":
             lines = lines[:-1]
 
         cleaned = "\n".join(lines).strip()
