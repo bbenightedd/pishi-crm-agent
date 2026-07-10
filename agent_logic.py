@@ -9,7 +9,7 @@ load_dotenv()
 
 SHEET_ID = "1tkFlhw-zc3-jU9qfY4TGJ0-9Q2-4fScpKerfU_jYPRI"
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
-ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
+ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5")
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -165,7 +165,7 @@ def process_sheet():
         crm_status_current = get_row_crm_status(row)
 
         if WRITE_NEW_STATUS_IF_BLANK and crm_status_current == "":
-            worksheet.update(f"K{idx}", [["New"]])
+            worksheet.update(values=[["New"]], range_name=f"K{idx}")
             crm_status_current = "New"
 
         lead_text = build_lead_text(row)
