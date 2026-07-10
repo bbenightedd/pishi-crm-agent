@@ -98,24 +98,6 @@ def analyze_lead(lead_text, retry_note=None):
     return "".join(text_blocks).strip()
 
 
-def strip_code_fences(text):
-    cleaned = text.strip()
-
-    if cleaned.startswith("
-```"):
-lines = cleaned.splitlines()
-
-if lines and lines[0].startswith("
-```"):
-            lines = lines[1:]
-
-        if lines and lines[-1].strip() == "
-```":
-lines = lines[:-1]
-
-cleaned = "\n".join(lines).strip()
-
-return cleaned
 
 
 def extract_json_from_response(response_text):
@@ -129,6 +111,21 @@ decoder = json.JSONDecoder()
 parsed, _ = decoder.raw_decode(cleaned[start_index:])
 return parsed
 
+def strip_code_fences(text):
+cleaned = text.strip()
+
+if cleaned.startswith("```"):
+        lines = cleaned.splitlines()
+
+        if lines and lines[0].startswith("```"):
+lines = lines[1:]
+
+if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+
+        cleaned = "\n".join(lines).strip()
+
+    return cleaned
 
 def write_failed_response(row_idx, full_name, response_text, error_message):
 FAILED_RESPONSE_DIR.mkdir(parents=True, exist_ok=True)
