@@ -9,7 +9,7 @@ load_dotenv()
 
 SHEET_ID = "1tkFlhw-zc3-jU9qfY4TGJ0-9Q2-4fScpKerfU_jYPRI"
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
-ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-latest")
+ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
